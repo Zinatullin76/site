@@ -17,7 +17,7 @@
             padding: 0;
             line-height: 1.6;
             text-align: center;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Скрываем полосу прокрутки при вылете анимации */
         }
 
         h1, h2, h3 {
@@ -25,107 +25,20 @@
             color: #8b5e3c;
         }
 
-        /* --- СТИЛИ КОНВЕРТА --- */
-        .envelope-section {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f4eee8;
-            perspective: 1000px;
-        }
-
-        .envelope-wrapper {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            background-color: #d4bc9c;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Клапан конверта */
-        .envelope-top {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 100px solid #c4a98a;
-            transform-origin: top;
-            transition: transform 1s ease;
-            z-index: 3;
-        }
-
-        /* Тело конверта (нижняя часть) */
-        .envelope-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-bottom: 100px solid #d4bc9c;
-            z-index: 4;
-        }
-
-        /* Листок с именами внутри */
-        .letter {
-            position: absolute;
-            bottom: 10px;
-            left: 5%;
-            width: 90%;
-            height: 180px;
-            background: white;
-            transition: transform 1s ease;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        /* Анимация при скролле */
-        .opened .envelope-top {
-            transform: rotateX(180deg);
-            z-index: 1;
-        }
-        .opened .letter {
-            transform: translateY(-100px);
-        }
-
-        .scroll-hint {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.9rem;
-            color: #8b5e3c;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-        /* --- КОНЕЦ СТИЛЕЙ КОНВЕРТА --- */
-
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            opacity: 0; /* Прячем основной контент до открытия */
-            transition: opacity 1.5s ease;
         }
 
-        .show-content {
-            opacity: 1;
+        header {
+            padding: 60px 20px;
         }
-
-        header { padding: 60px 20px; }
-        header h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
         
         .date {
             font-size: 1.5rem;
@@ -150,10 +63,13 @@
             flex: 1;
             min-width: 250px;
             max-width: 350px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease; /* Добавили плавность при наведении */
         }
 
-        .photo-card:hover { transform: scale(1.03); }
+        /* Эффект увеличения при наведении мышки */
+        .photo-card:hover {
+            transform: scale(1.03);
+        }
 
         .photo-card img {
             width: 100%;
@@ -162,10 +78,23 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .sepia-effect { height: 350px; filter: sepia(0.3); }
-        .modern-effect { height: 500px; filter: none; }
+        /* Стиль для детских фото (с сепией) */
+        .sepia-effect {
+            height: 350px;
+            filter: sepia(0.3);
+        }
 
-        .caption { margin-top: 10px; font-style: italic; color: #666; }
+        /* Стиль для современных фото (без сепии, пониже) */
+        .modern-effect {
+            height: 500px;
+            filter: none;
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
 
         .invitation-text {
             padding: 40px 20px;
@@ -206,29 +135,20 @@
             margin-top: 20px;
         }
 
-        button:hover { background-color: #6d462b; }
+        button:hover {
+            background-color: #6d462b;
+        }
 
         @media (max-width: 600px) {
             header h1 { font-size: 2.5rem; }
             .childhood-section { flex-direction: column; align-items: center; }
+            .rsvp-form { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="envelope-section" id="envelope-trigger">
-        <div class="envelope-wrapper" id="envelope">
-            <div class="envelope-top"></div>
-            <div class="letter">
-                <h3 style="margin:0; font-size: 1.2rem;">Приглашение</h3>
-                <p style="font-size: 0.8rem;">Артур & Лилия</p>
-            </div>
-            <div class="envelope-bottom"></div>
-        </div>
-        <div class="scroll-hint">Листайте вниз, чтобы открыть</div>
-    </div>
-
-    <div class="container" id="main-content">
+    <div class="container">
         
         <header data-aos="fade-down" data-aos-duration="1000">
             <h1>Артур & Лилия</h1>
@@ -238,44 +158,50 @@
         <section>
             <h2 data-aos="fade-up">Как всё начиналось...</h2>
             <div class="childhood-section">
+                
                 <div class="photo-card" data-aos="fade-right" data-aos-delay="100">
                     <img src="Artur.jpg" alt="Жених" class="sepia-effect">
                     <div class="caption">Артур, 2006 год</div>
                 </div>
+
                 <div class="photo-card" data-aos="fade-left" data-aos-delay="300">
                     <img src="liblu.jpg" alt="Невеста" class="sepia-effect">
                     <div class="caption">Лилечка, 2006 год</div>
                 </div>
+
             </div>
         </section>
 
         <section class="invitation-text" data-aos="zoom-in" data-aos-duration="1000">
             <h3>Дорогие родные и близкие!</h3>
             <p>
-                Когда мы были маленькими, мы еще не знали, что однажды встретимся и станем семьей. 
-                Мы будем счастливы, если в этот важный день вы будете рядом!<br>
+                Когда мы были маленькими (как на фото выше), мы еще не знали, что однажды встретимся и станем семьей. Прошли годы, мы выросли, изменились, но главное чудо случилось — мы нашли друг друга. Мы будем счастливы, если в этот важный день вы будете рядом!<br>
             </p>
             <p>
-                <strong>Где:</strong> Банкетный зал "Фьюжн", г.Самара, ул. Николаевский проспект, 2<br>
+                <strong>Где:</strong> Банкетный зал "Фьюжн",г.Самара, ул. Николаевский проспект, 2<br>
                 <strong>Сбор гостей:</strong> 16:00
             </p>
         </section>
 
         <section>
-            <h2 data-aos="fade-up">Сегодня мы еще милее...</h2>
+            <h2 data-aos="fade-up">Сегодня мы еще милее, чем 20 лет назад. Все потому что - вместе</h2>
             <div class="childhood-section">
+                
                 <div class="photo-card" data-aos="fade-up" data-aos-delay="100">
                     <img src="us.jpg" alt="Мы 1" class="modern-effect">
                 </div>
+                
                 <div class="photo-card" data-aos="fade-up" data-aos-delay="300">
                     <img src="us2.jpg" alt="Мы 2" class="modern-effect">
                 </div>
+
             </div>
         </section>
 
         <section class="rsvp-form" id="rsvp" data-aos="flip-up" data-aos-duration="1000">
             <h2>Подтверждение участия</h2>
             <p>Пожалуйста, заполните форму до 1 марта</p>
+            
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <input type="text" name="name" placeholder="Ваши Имя и Фамилия" required>
                 <select name="attendance">
@@ -291,29 +217,15 @@
         <footer>
             <p style="margin-top: 50px; font-size: 0.8rem; color: #999;">С любовью, Артур и Лилечка</p>
         </footer>
+
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Скрипт для открытия конверта при скролле
-        window.addEventListener('scroll', function() {
-            const envelope = document.getElementById('envelope');
-            const content = document.getElementById('main-content');
-            const scrollPos = window.scrollY;
-
-            if (scrollPos > 50) {
-                envelope.classList.add('opened');
-                content.classList.add('show-content');
-            } else {
-                envelope.classList.remove('opened');
-                content.classList.remove('show-content');
-            }
-        });
-
-        // Запуск анимации AOS
+        // Запуск анимации
         AOS.init({
-            once: true,
-            offset: 100
+            once: true, // Анимация проигрывается только один раз при скролле вниз
+            offset: 100 // Начинать анимацию чуть заранее
         });
     </script>
 </body>
