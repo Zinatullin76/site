@@ -669,99 +669,109 @@ animation: lineDraw 1s ease-out 1.4s forwards;
 to { width: 100px; }
 }
 
-/* RSVP - АДАПТИВНЫЙ */
-.rsvp{
+/* GOOGLE FORMS - АДАПТИВНАЯ ФОРМА */
+.google-form-section{
 background:linear-gradient(135deg,#fdfcf9,#f3ede4);
 }
-.form{
-max-width:650px;
-margin:auto;
-background:white;
+
+.google-form-container {
+max-width: 650px;
+margin: auto;
+background: white;
 padding: clamp(30px, 6vw, 60px) clamp(20px, 5vw, 60px);
-box-shadow:0 20px 60px rgba(0,0,0,.06);
+box-shadow: 0 20px 60px rgba(0,0,0,.06);
 border-radius: 8px;
-animation: formFloat 3s ease-in-out infinite alternate;
-}
-
-@keyframes formFloat {
-0% { transform: translateY(0); }
-100% { transform: translateY(-10px); }
-}
-
-input,select,textarea{
-width:100%;
-padding: 15px 0;
-margin-bottom: 20px;
-border:none;
-border-bottom:1px solid #ddd;
-font-family:inherit;
-font-size: 16px;
-background: transparent;
-transition: all 0.3s ease;
-}
-
-input:focus, select:focus, textarea:focus{
-outline:none;
-border-bottom-color: var(--gold);
-transform: translateY(-2px);
-}
-
-button{
-background:var(--gold);
-color:white;
-border:none;
-padding: clamp(15px, 4vw, 18px) clamp(40px, 8vw, 50px);
-font-family:'Cinzel';
-letter-spacing:2px;
-cursor:pointer;
-transition:.3s;
-font-size: clamp(0.9rem, 3vw, 1rem);
-border-radius: 4px;
-width: 100%;
-max-width: 300px;
-margin-top: 10px;
 position: relative;
 overflow: hidden;
 }
 
-button::after {
+.google-form-container::before {
 content: '';
 position: absolute;
-top: 50%;
-left: 50%;
-width: 5px;
-height: 5px;
-background: rgba(255, 255, 255, 0.5);
-opacity: 0;
-border-radius: 100%;
-transform: scale(1, 1) translate(-50%);
-transform-origin: 50% 50%;
+top: 0;
+left: 0;
+width: 100%;
+height: 3px;
+background: linear-gradient(90deg, var(--gold), var(--dark-gold), var(--gold));
 }
 
-button:focus:not(:active)::after {
-animation: ripple 1s ease-out;
+.form-header {
+margin-bottom: 30px;
 }
 
-@keyframes ripple {
-0% {
-transform: scale(0, 0);
-opacity: 0.5;
-}
-100% {
-transform: scale(20, 20);
-opacity: 0;
-}
+.form-header .section-title {
+margin-bottom: 10px;
 }
 
-button:hover{
-background:var(--dark-gold);
+.form-description {
+color: #666;
+font-size: 1.1rem;
+margin-bottom: 30px;
+line-height: 1.6;
+}
+
+.google-form-link {
+display: inline-block;
+background: var(--gold);
+color: white;
+text-decoration: none;
+padding: 18px 40px;
+font-family: 'Cinzel';
+letter-spacing: 2px;
+border-radius: 4px;
+font-size: 1.1rem;
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+}
+
+.google-form-link:hover {
+background: var(--dark-gold);
 transform: translateY(-3px);
-box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+box-shadow: 0 10px 25px rgba(197, 160, 89, 0.4);
+color: white;
 }
-@media(min-width: 480px){
-button{
-width: auto;
+
+.google-form-link::after {
+content: '→';
+margin-left: 10px;
+transition: transform 0.3s ease;
 }
+
+.google-form-link:hover::after {
+transform: translateX(5px);
+}
+
+.form-instructions {
+margin-top: 30px;
+padding: 20px;
+background: #f9f6f1;
+border-radius: 8px;
+text-align: left;
+}
+
+.form-instructions h3 {
+color: var(--dark-gold);
+margin-bottom: 10px;
+font-family: 'Cinzel';
+}
+
+.form-instructions ol {
+padding-left: 20px;
+margin: 10px 0;
+}
+
+.form-instructions li {
+margin-bottom: 8px;
+color: #555;
+}
+
+.form-instructions p {
+color: #777;
+font-size: 0.9rem;
+margin-top: 15px;
+font-style: italic;
 }
 
 /* FOOTER */
@@ -784,7 +794,6 @@ opacity: 1;
 }
 
 footer::before {
-content: '❤';
 position: absolute;
 top: -15px;
 left: 50%;
@@ -834,9 +843,8 @@ transform: translateY(-5px) scale(1.02) !important;
 margin: 5px 0;
 }
 
-.form{
+.google-form-container{
 padding: 30px 25px;
-animation: none;
 }
 
 .floral-decoration {
@@ -935,6 +943,13 @@ animation: cornerAppearMobile 0.5s ease-out 0.8s both;
 to {
 opacity: 1;
 }
+}
+
+.google-form-link {
+padding: 15px 30px;
+font-size: 1rem;
+width: 100%;
+text-align: center;
 }
 }
 
@@ -1047,20 +1062,35 @@ transform: translateY(0);
 </div>
 </section>
 
-<!-- RSVP -->
-<section class="rsvp" style="--section-index: 4">
-<div class="form" data-aos="flip-up">
+<!-- GOOGLE FORM SECTION -->
+<section class="google-form-section" style="--section-index: 4">
+<div class="google-form-container" data-aos="flip-up">
+<div class="form-header">
 <h2 class="section-title">Подтвердите присутствие</h2>
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-<input type="text" name="name" placeholder="Имя и Фамилия" required>
-<select name="status">
-<option>Я приду</option>
-<option>Приду с парой</option>
-<option>Не смогу прийти</option>
-</select>
-<textarea name="msg" rows="3" placeholder="Пожелания или аллергии"></textarea>
-<button type="submit">Отправить</button>
-</form>
+<p class="form-description">
+Пожалуйста, заполните форму Google Forms, чтобы мы могли лучше подготовиться к нашему особому дню
+</p>
+</div>
+
+<!-- ВАЖНО: ЗАМЕНИТЕ ЭТУ ССЫЛКУ НА СВОЮ ФОРМУ -->
+<iframe src="https://forms.gle/qcAX2PcG2Lucd79MA" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0">
+    Загрузка формы...
+</iframe>
+<div class="form-instructions">
+<h3>Как заполнить форму:</h3>
+<ol>
+<li>Заполните все обязательные поля (отмечены *)</li>
+<li>В разделе "Пожелания" можете написать всё, что пожелаете(Если придете семьей, то сколько человек придет)</li>
+<li>Нажмите "Отправить" в конце формы</li>
+<li>Вы получите подтверждение о успешной отправке</li>
+</ol>
+<p>Если у вас возникли проблемы с формой, свяжитесь с нами напрямую</p>
+</div>
 </div>
 </section>
 
@@ -1123,36 +1153,6 @@ if (!supportsAnimations()) {
 document.documentElement.classList.add('no-animations');
 }
 
-// Адаптивная проверка производительности
-let lastTime = 0;
-let frameCount = 0;
-let fps = 60;
-
-function checkPerformance(currentTime) {
-if (lastTime) {
-const delta = currentTime - lastTime;
-if (delta > 0) {
-fps = Math.round(1000 / delta);
-}
-}
-
-frameCount++;
-lastTime = currentTime;
-
-// Если FPS низкий, уменьшаем количество анимаций
-if (fps < 30 && !document.body.classList.contains('reduce-animations')) {
-document.body.classList.add('reduce-animations');
-console.log('Анимации оптимизированы для производительности');
-}
-
-requestAnimationFrame(checkPerformance);
-}
-
-// Запускаем проверку производительности (только на десктопе)
-if (window.innerWidth > 768) {
-requestAnimationFrame(checkPerformance);
-}
-
 // Инициализация элементов с задержкой
 document.addEventListener('DOMContentLoaded', function() {
 // Запускаем проверку скролла после небольшой задержки
@@ -1160,45 +1160,34 @@ setTimeout(checkScroll, 100);
   
 // Адаптивная загрузка для мобильных
 if ('ontouchstart' in window) {
-document.querySelectorAll('button, input, select, textarea').forEach(el => {
+document.querySelectorAll('a.google-form-link').forEach(el => {
 el.style.cursor = 'pointer';
 el.style.touchAction = 'manipulation';
 });
 }
 
-// Плавный скролл для якорей
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const targetId = this.getAttribute('href');
-if (targetId === '#') return;
-const targetElement = document.querySelector(targetId);
-if (targetElement) {
-window.scrollTo({
-top: targetElement.offsetTop - 80,
-behavior: 'smooth'
+// Анимация кнопки при клике
+const formLink = document.querySelector('.google-form-link');
+if (formLink) {
+formLink.addEventListener('click', function(e) {
+// Можно добавить анимацию клика
+this.style.transform = 'scale(0.95)';
+setTimeout(() => {
+this.style.transform = '';
+}, 150);
 });
 }
 });
+
+// Добавляем анимацию при наведении на ссылку
+const googleLink = document.querySelector('.google-form-link');
+if (googleLink) {
+googleLink.addEventListener('mouseenter', function() {
+this.style.transform = 'translateY(-3px) scale(1.02)';
 });
+googleLink.addEventListener('mouseleave', function() {
+this.style.transform = 'translateY(0) scale(1)';
 });
-
-// Добавляем поддержку свайпа на мобильных
-let touchStartY = 0;
-let touchEndY = 0;
-
-document.addEventListener('touchstart', e => {
-touchStartY = e.changedTouches[0].screenY;
-}, { passive: true });
-
-document.addEventListener('touchend', e => {
-touchEndY = e.changedTouches[0].screenY;
-handleSwipe();
-}, { passive: true });
-
-function handleSwipe() {
-const swipeLength = touchEndY - touchStartY;
-// Можно добавить логику для свайпа, если нужно
 }
 </script>
 
