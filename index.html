@@ -43,10 +43,16 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:url('us_chat.jfif') center/cover fixed;
+background:url('us_chat.jfif') center/cover;
 filter: blur(6px);
 transform: scale(1.05);
 z-index: 1;
+animation: bgFloat 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloat {
+0% { transform: scale(1.05) translateY(0); }
+100% { transform: scale(1.08) translateY(-10px); }
 }
 
 .hero::after{
@@ -71,6 +77,12 @@ font-size: clamp(3rem, 10vw, 5.5rem);
 margin:0;
 color:var(--dark-gold);
 line-height: 1.1;
+animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+0% { text-shadow: 0 0 10px rgba(197, 160, 89, 0.2); }
+100% { text-shadow: 0 0 25px rgba(197, 160, 89, 0.4); }
 }
 
 .hero p{
@@ -78,6 +90,18 @@ font-family:'Cinzel';
 letter-spacing: clamp(2px, 1vw, 4px);
 margin-top: 15px;
 font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 /* TIMER - АДАПТИВНЫЙ */
@@ -95,7 +119,15 @@ border-radius:10px;
 min-width: 70px;
 width: clamp(70px, 20vw, 100px);
 backdrop-filter: blur(5px);
+animation: pulse 2s infinite;
+animation-delay: calc(var(--i) * 0.2s);
 }
+
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+
 .timer span:first-child{
 font-size: clamp(1.4rem, 5vw, 1.8rem);
 color:var(--gold);
@@ -111,7 +143,17 @@ margin-top: 5px;
 /* SECTIONS */
 section{
 padding: clamp(60px, 10vw, 100px) 5%;
+opacity: 0;
+animation: sectionAppear 0.8s ease-out forwards;
+animation-delay: calc(var(--section-index) * 0.3s);
 }
+
+@keyframes sectionAppear {
+to {
+opacity: 1;
+}
+}
+
 .section-title{
 font-family:'Playfair Display';
 font-size: clamp(2rem, 6vw, 3rem);
@@ -125,6 +167,12 @@ height:2px;
 background:var(--gold);
 display:block;
 margin:15px auto 0;
+animation: lineExpand 1s ease-out 0.5s both;
+}
+
+@keyframes lineExpand {
+from { width: 0; opacity: 0; }
+to { width: 60px; opacity: 1; }
 }
 
 /* CHILDHOOD - АДАПТИВНЫЙ */
@@ -144,28 +192,57 @@ padding: 15px 15px 30px;
 width: 100%;
 max-width: 320px;
 box-shadow:0 15px 30px rgba(0,0,0,.08);
-transform:rotate(-2deg);
-transition:.4s;
+transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+position: relative;
+overflow: hidden;
 }
-.polaroid:nth-child(even){transform:rotate(3deg)}
+
+.polaroid::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+transition: left 0.7s ease;
+}
+
+.polaroid:hover::before {
+left: 100%;
+}
+
 .polaroid:hover{
-transform:rotate(0) translateY(-10px);
+transform: translateY(-10px) scale(1.02);
 box-shadow:0 25px 50px rgba(197,160,89,.25);
 }
+
 .polaroid img{
 width:100%;
 height: clamp(250px, 70vw, 320px);
 object-fit:cover;
 filter:sepia(.25);
 border-radius: 2px;
+transition: filter 0.5s ease;
 }
+
+.polaroid:hover img {
+filter: sepia(0.1) brightness(1.05);
+}
+
 .child-name{
 font-family:'Great Vibes';
 font-size: clamp(1.8rem, 6vw, 2.2rem);
 color:var(--dark-gold);
 margin-top: 15px;
 line-height: 1.2;
+transition: color 0.3s ease;
 }
+
+.polaroid:hover .child-name {
+color: var(--gold);
+}
+
 .child-text{
 display:block;
 margin-top: 10px;
@@ -174,6 +251,12 @@ line-height:1.6;
 color:#666;
 font-weight:300;
 padding: 0 5px;
+opacity: 0.8;
+transition: opacity 0.3s ease;
+}
+
+.polaroid:hover .child-text {
+opacity: 1;
 }
 
 /* DESTINY - АДАПТИВНЫЙ */
@@ -186,19 +269,47 @@ width:2px;
 height: clamp(80px, 15vw, 120px);
 background:linear-gradient(to bottom,transparent,var(--gold),transparent);
 margin:0 auto 30px;
+animation: lineGlow 3s ease-in-out infinite alternate;
 }
+
+@keyframes lineGlow {
+0% { box-shadow: 0 0 5px rgba(197, 160, 89, 0.3); }
+100% { box-shadow: 0 0 15px rgba(197, 160, 89, 0.6); }
+}
+
 .destiny p{
 font-size: clamp(1.1rem, 4vw, 1.4rem);
 margin: 8px 0;
 font-weight:300;
+animation: textReveal 1s ease-out both;
+animation-delay: calc(var(--i) * 0.3s);
 }
+
+@keyframes textReveal {
+from {
+opacity: 0;
+letter-spacing: -5px;
+}
+to {
+opacity: 1;
+letter-spacing: normal;
+}
+}
+
 .destiny .accent{
 font-family:'Great Vibes';
 font-size: clamp(2.2rem, 8vw, 3rem);
 color:var(--gold);
 margin-top: 20px;
 line-height: 1.1;
+animation: heartbeat 1.5s ease-in-out infinite;
 }
+
+@keyframes heartbeat {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+
 .destiny-years{
 margin-top: 30px;
 font-family:'Cinzel';
@@ -211,6 +322,22 @@ flex-wrap: wrap;
 }
 .destiny-years span{
 font-size: clamp(1.2rem, 4vw, 1.5rem);
+position: relative;
+}
+
+.destiny-years span::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 1px;
+background: var(--gold);
+transition: width 0.5s ease;
+}
+
+.destiny-years span:hover::after {
+width: 100%;
 }
 
 /* STORY - КРАСИВОЕ ОФОРМЛЕНИЕ ФОТО */
@@ -234,7 +361,14 @@ background-image:
     radial-gradient(circle at 20% 80%, rgba(197, 160, 89, 0.05) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(197, 160, 89, 0.05) 0%, transparent 50%);
 z-index: 0;
+animation: floatBg 20s ease-in-out infinite alternate;
 }
+
+@keyframes floatBg {
+0% { transform: translate(0, 0) scale(1); }
+100% { transform: translate(-10px, -10px) scale(1.02); }
+}
+
 @media(min-width: 992px){
 .story{
 grid-template-columns: 1fr 1fr;
@@ -261,6 +395,18 @@ box-shadow:
     inset 0 0 0 1px rgba(197, 160, 89, 0.1);
 border-radius: 16px;
 transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+animation: photoReveal 1s ease-out 0.5s both;
+}
+
+@keyframes photoReveal {
+from {
+opacity: 0;
+transform: translateY(30px) rotate(-2deg);
+}
+to {
+opacity: 1;
+transform: translateY(0) rotate(0);
+}
 }
 
 .photo-frame:hover {
@@ -294,16 +440,19 @@ transform: scale(1.02);
 }
 
 /* ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ */
-.frame-decoration {
-position: absolute;
-z-index: 2;
-}
-
 .corner {
 width: 40px;
 height: 40px;
 border: 2px solid var(--gold);
 position: absolute;
+animation: cornerAppear 0.8s ease-out 0.8s both;
+opacity: 0;
+}
+
+@keyframes cornerAppear {
+to {
+opacity: 1;
+}
 }
 
 .corner-tl {
@@ -311,6 +460,7 @@ top: 10px;
 left: 10px;
 border-right: none;
 border-bottom: none;
+animation-delay: 0.9s;
 }
 
 .corner-tr {
@@ -318,6 +468,7 @@ top: 10px;
 right: 10px;
 border-left: none;
 border-bottom: none;
+animation-delay: 1s;
 }
 
 .corner-bl {
@@ -325,6 +476,7 @@ bottom: 10px;
 left: 10px;
 border-right: none;
 border-top: none;
+animation-delay: 1.1s;
 }
 
 .corner-br {
@@ -332,9 +484,10 @@ bottom: 10px;
 right: 10px;
 border-left: none;
 border-top: none;
+animation-delay: 1.2s;
 }
 
-/* ЦВЕТОЧНЫЕ ДЕКОРАЦИИ */
+/* АНИМИРОВАННЫЕ ЦВЕТОЧНЫЕ ДЕКОРАЦИИ */
 .floral-decoration {
 position: absolute;
 width: 60px;
@@ -344,18 +497,22 @@ background:
     radial-gradient(circle at 30% 30%, var(--gold) 2px, transparent 3px),
     radial-gradient(circle at 70% 70%, var(--gold) 2px, transparent 3px);
 clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+animation: floralRotate 10s linear infinite;
+}
+
+@keyframes floralRotate {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
 }
 
 .floral-top {
 top: -15px;
 right: 20%;
-transform: rotate(45deg);
 }
 
 .floral-bottom {
 bottom: -15px;
 left: 20%;
-transform: rotate(45deg);
 }
 
 /* ПОДПИСЬ ПОД ФОТО */
@@ -366,6 +523,16 @@ font-size: clamp(1.8rem, 4vw, 2.2rem);
 color: var(--dark-gold);
 position: relative;
 display: inline-block;
+animation: captionSlide 1s ease-out 1.5s both;
+opacity: 0;
+transform: translateY(20px);
+}
+
+@keyframes captionSlide {
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 .photo-caption::before,
@@ -375,6 +542,12 @@ color: var(--gold);
 opacity: 0.6;
 margin: 0 15px;
 font-size: 1.4rem;
+animation: symbolPulse 2s ease-in-out infinite;
+}
+
+@keyframes symbolPulse {
+0%, 100% { opacity: 0.6; transform: scale(1); }
+50% { opacity: 1; transform: scale(1.1); }
 }
 
 .story-text{
@@ -395,14 +568,19 @@ padding: 0 0 0 60px;
 margin-bottom: 20px;
 position: relative;
 padding-left: 20px;
+animation: paragraphReveal 0.6s ease-out both;
+animation-delay: calc(var(--p-index) * 0.2s);
 }
-.story-text p::before {
-content: '✨';
-position: absolute;
-left: -5px;
-top: 0;
-color: var(--gold);
-opacity: 0.7;
+
+@keyframes paragraphReveal {
+from {
+opacity: 0;
+transform: translateX(-20px);
+}
+to {
+opacity: 1;
+transform: translateX(0);
+}
 }
 
 .love-signature {
@@ -413,6 +591,14 @@ margin-top: 40px;
 display: block;
 position: relative;
 padding: 20px 0;
+animation: signatureAppear 1s ease-out 0.8s both;
+opacity: 0;
+}
+
+@keyframes signatureAppear {
+to {
+opacity: 1;
+}
 }
 
 .love-signature::before {
@@ -421,9 +607,10 @@ position: absolute;
 top: 0;
 left: 50%;
 transform: translateX(-50%);
-width: 100px;
+width: 0;
 height: 1px;
 background: linear-gradient(90deg, transparent, var(--gold), transparent);
+animation: lineDraw 1s ease-out 1.2s forwards;
 }
 
 .love-signature::after {
@@ -432,9 +619,14 @@ position: absolute;
 bottom: 0;
 left: 50%;
 transform: translateX(-50%);
-width: 100px;
+width: 0;
 height: 1px;
 background: linear-gradient(90deg, transparent, var(--gold), transparent);
+animation: lineDraw 1s ease-out 1.4s forwards;
+}
+
+@keyframes lineDraw {
+to { width: 100px; }
 }
 
 /* RSVP - АДАПТИВНЫЙ */
@@ -448,7 +640,14 @@ background:white;
 padding: clamp(30px, 6vw, 60px) clamp(20px, 5vw, 60px);
 box-shadow:0 20px 60px rgba(0,0,0,.06);
 border-radius: 8px;
+animation: formFloat 3s ease-in-out infinite alternate;
 }
+
+@keyframes formFloat {
+0% { transform: translateY(0); }
+100% { transform: translateY(-10px); }
+}
+
 input,select,textarea{
 width:100%;
 padding: 15px 0;
@@ -458,11 +657,15 @@ border-bottom:1px solid #ddd;
 font-family:inherit;
 font-size: 16px;
 background: transparent;
+transition: all 0.3s ease;
 }
+
 input:focus, select:focus, textarea:focus{
 outline:none;
 border-bottom-color: var(--gold);
+transform: translateY(-2px);
 }
+
 button{
 background:var(--gold);
 color:white;
@@ -477,8 +680,44 @@ border-radius: 4px;
 width: 100%;
 max-width: 300px;
 margin-top: 10px;
+position: relative;
+overflow: hidden;
 }
-button:hover{background:var(--dark-gold)}
+
+button::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 5px;
+height: 5px;
+background: rgba(255, 255, 255, 0.5);
+opacity: 0;
+border-radius: 100%;
+transform: scale(1, 1) translate(-50%);
+transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+0% {
+transform: scale(0, 0);
+opacity: 0.5;
+}
+100% {
+transform: scale(20, 20);
+opacity: 0;
+}
+}
+
+button:hover{
+background:var(--dark-gold);
+transform: translateY(-3px);
+box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+}
 @media(min-width: 480px){
 button{
 width: auto;
@@ -494,6 +733,14 @@ font-size: clamp(0.7rem, 2vw, 0.85rem);
 letter-spacing:2px;
 line-height: 1.5;
 position: relative;
+animation: footerAppear 1s ease-out 0.5s both;
+opacity: 0;
+}
+
+@keyframes footerAppear {
+to {
+opacity: 1;
+}
 }
 
 footer::before {
@@ -506,6 +753,21 @@ color: var(--gold);
 font-size: 1.5rem;
 background: #2c2c2c;
 padding: 0 20px;
+animation: heartBeat 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+0%, 100% { transform: translateX(-50%) scale(1); }
+50% { transform: translateX(-50%) scale(1.2); }
+}
+
+/* АДАПТИВНЫЕ НАСТРОЙКИ АНИМАЦИЙ ДЛЯ МОБИЛЬНЫХ */
+@media (prefers-reduced-motion: reduce) {
+*, ::before, ::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
 }
 
 /* MOBILE ОПТИМИЗАЦИЯ */
@@ -523,7 +785,7 @@ transform: none !important;
 margin-bottom: 30px;
 }
 .polaroid:hover{
-transform: translateY(-5px) !important;
+transform: translateY(-5px) scale(1.02) !important;
 }
 
 .destiny p{
@@ -532,6 +794,7 @@ margin: 5px 0;
 
 .form{
 padding: 30px 25px;
+animation: none;
 }
 
 .floral-decoration {
@@ -543,8 +806,32 @@ display: none;
 margin: 0 8px;
 }
 
-.story-text p::before {
-display: none;
+/* Упрощаем анимации для мобильных */
+.hero-bg {
+animation: bgFloatMobile 30s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloatMobile {
+0% { transform: scale(1.05) translateY(0); }
+100% { transform: scale(1.06) translateY(-5px); }
+}
+
+.timer div {
+animation: pulseMobile 3s infinite;
+}
+
+@keyframes pulseMobile {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.03); }
+}
+
+.floral-decoration {
+animation: floralRotateMobile 20s linear infinite;
+}
+
+@keyframes floralRotateMobile {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
 }
 }
 
@@ -562,16 +849,55 @@ gap: 8px;
 .timer div{
 min-width: 65px;
 padding: 12px 8px;
+animation: none;
 }
 
 .photo-frame {
 padding: 20px;
+animation: photoRevealMobile 1s ease-out 0.5s both;
+}
+
+@keyframes photoRevealMobile {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 .corner {
 width: 30px;
 height: 30px;
+animation: cornerAppearMobile 0.5s ease-out 0.8s both;
 }
+
+@keyframes cornerAppearMobile {
+to {
+opacity: 1;
+}
+}
+}
+
+/* ПРОГРЕССИВНОЕ УЛУЧШЕНИЕ ДЛЯ ПОДДЕРЖИВАЮЩИХ УСТРОЙСТВ */
+@supports (backdrop-filter: blur(10px)) {
+.timer div {
+backdrop-filter: blur(10px);
+}
+}
+
+/* АНИМАЦИЯ ПРИ СКРОЛЛЕ ДЛЯ АКТИВНЫХ ЭЛЕМЕНТОВ */
+.animate-on-scroll {
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+opacity: 1;
+transform: translateY(0);
 }
 </style>
 </head>
@@ -585,19 +911,19 @@ height: 30px;
 <p>Приглашение на свадьбу</p>
 <h1>Артур & Лилия</h1>
 <div class="timer">
-<div><span id="days">00</span><span>Дней</span></div>
-<div><span id="hours">00</span><span>Часов</span></div>
-<div><span id="minutes">00</span><span>Минут</span></div>
+<div style="--i: 0"><span id="days">00</span><span>Дней</span></div>
+<div style="--i: 1"><span id="hours">00</span><span>Часов</span></div>
+<div style="--i: 2"><span id="minutes">00</span><span>Минут</span></div>
 </div>
 <p style="margin-top:25px; font-size: clamp(1rem, 3vw, 1.2rem)">9 мая 2026 · Самара</p>
 </div>
 </section>
 
 <!-- CHILDHOOD -->
-<section class="childhood">
+<section class="childhood" style="--section-index: 1">
 <h2 class="section-title" data-aos="fade-up">С чего всё начиналось</h2>
 <div class="polaroids">
-<div class="polaroid" data-aos="zoom-in">
+<div class="polaroid animate-on-scroll">
 <img src="Artur.jpg" alt="Артур в детстве">
 <p class="child-name">Артур</p>
 <span class="child-text">
@@ -606,7 +932,7 @@ height: 30px;
 чьим-то «навсегда».
 </span>
 </div>
-<div class="polaroid" data-aos="zoom-in" data-aos-delay="200">
+<div class="polaroid animate-on-scroll" data-aos-delay="200">
 <img src="liblu.jpg" alt="Лилия в детстве">
 <p class="child-name">Лилия</p>
 <span class="child-text">
@@ -619,11 +945,11 @@ height: 30px;
 </section>
 
 <!-- DESTINY -->
-<section class="destiny">
-<div class="destiny-line" data-aos="zoom-in"></div>
-<p data-aos="fade-up">Два детства.</p>
-<p data-aos="fade-up" data-aos-delay="150">Два разных пути.</p>
-<p class="accent" data-aos="fade-up" data-aos-delay="300">Одна судьба.</p>
+<section class="destiny" style="--section-index: 2">
+<div class="destiny-line"></div>
+<p style="--i: 0">Два детства.</p>
+<p style="--i: 1" data-aos-delay="150">Два разных пути.</p>
+<p class="accent" style="--i: 2" data-aos-delay="300">Одна судьба.</p>
 <div class="destiny-years">
 <span data-aos="fade-right">2006</span>
 <span>•</span>
@@ -632,8 +958,8 @@ height: 30px;
 </section>
 
 <!-- STORY -->
-<section class="story">
-<div class="story-photos" data-aos="fade-up">
+<section class="story" style="--section-index: 3">
+<div class="story-photos">
 <div class="photo-frame">
 <div class="corner corner-tl"></div>
 <div class="corner corner-tr"></div>
@@ -647,16 +973,16 @@ height: 30px;
 <img src="us.jpg" class="photo-main" alt="Артур и Лилия вместе">
 </div>
 </div>
-<div class="photo-caption" data-aos="fade-up" data-aos-delay="300">
+<div class="photo-caption">
 Навсегда вместе
 </div>
 </div>
 
-<div class="story-text" data-aos="fade-up" data-aos-delay="200">
+<div class="story-text">
 <h2 class="section-title">Наша история</h2>
-<p>Два сердца, которые искали друг друга, не зная, что поиск уже завершён. Две души, чьи пути были предопределены самой судьбой.</p>
-<p>Мы прошли через расстояния и время, чтобы в один прекрасный день понять — мы созданы друг для друга. Каждый момент, каждая улыбка, каждый взгляд приближал нас к этому дню.</p>
-<p>И теперь, когда наши жизни сплелись воедино, мы с радостью делимся этим счастьем с вами. Приглашаем вас стать свидетелями начала нашей вечной истории.</p>
+<p style="--p-index: 0">Два сердца, которые искали друг друга, не зная, что поиск уже завершён. Две души, чьи пути были предопределены самой судьбой.</p>
+<p style="--p-index: 1">Мы прошли через расстояния и время, чтобы в один прекрасный день понять — мы созданы друг для друга. Каждый момент, каждая улыбка, каждый взгляд приближал нас к этому дню.</p>
+<p style="--p-index: 2">И теперь, когда наши жизни сплелись воедино, мы с радостью делимся этим счастьем с вами. Приглашаем вас стать свидетелями начала нашей вечной истории.</p>
 <span class="love-signature">
 С любовью, Артур и Лилия
 </span>
@@ -664,7 +990,7 @@ height: 30px;
 </section>
 
 <!-- RSVP -->
-<section class="rsvp">
+<section class="rsvp" style="--section-index: 4">
 <div class="form" data-aos="flip-up">
 <h2 class="section-title">Подтвердите присутствие</h2>
 <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
@@ -686,53 +1012,119 @@ ARTUR & LILIYA · 2026 · FOREVER
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
+// Инициализация AOS с поддержкой мобильных
 AOS.init({
-once:true,
+once: true,
 duration: 800,
 offset: 100,
 delay: 50,
-disable: function() {
-return window.innerWidth < 768;
-}
+disable: window.innerWidth < 320, // Отключаем только на очень маленьких экранах
+startEvent: 'DOMContentLoaded'
 });
 
+// Таймер обратного отсчета
 const date = new Date("May 9, 2026 16:00").getTime();
 
 function updateTimer() {
 const now = new Date().getTime();
 const d = date - now;
 if (d > 0) {
-document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
-document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
 }
 }
 
 updateTimer();
 setInterval(updateTimer, 1000);
 
-// Добавляем плавное появление рамки при загрузке
-document.addEventListener('DOMContentLoaded', function() {
-const photoFrame = document.querySelector('.photo-frame');
-if (photoFrame) {
-setTimeout(() => {
-photoFrame.style.opacity = '0';
-photoFrame.style.transform = 'translateY(20px)';
-photoFrame.style.transition = 'all 0.8s ease';
-    
-requestAnimationFrame(() => {
-photoFrame.style.opacity = '1';
-photoFrame.style.transform = 'translateY(0)';
-});
-}, 300);
+// Анимация при скролле
+function checkScroll() {
+const elements = document.querySelectorAll('.animate-on-scroll');
+elements.forEach(element => {
+const elementTop = element.getBoundingClientRect().top;
+const windowHeight = window.innerHeight;
+if (elementTop < windowHeight - 100) {
+element.classList.add('visible');
 }
 });
+}
 
-// Оптимизация для мобильных устройств
+// Проверяем сразу при загрузке и при скролле
+window.addEventListener('load', checkScroll);
+window.addEventListener('scroll', checkScroll);
+
+// Проверка поддержки анимаций
+function supportsAnimations() {
+return 'animation' in document.documentElement.style || 
+       'WebkitAnimation' in document.documentElement.style;
+}
+
+// Если анимации не поддерживаются, добавляем класс для отключения
+if (!supportsAnimations()) {
+document.documentElement.classList.add('no-animations');
+}
+
+// Адаптивная проверка производительности
+let lastTime = 0;
+let frameCount = 0;
+let fps = 60;
+
+function checkPerformance(currentTime) {
+if (lastTime) {
+const delta = currentTime - lastTime;
+if (delta > 0) {
+fps = Math.round(1000 / delta);
+}
+}
+
+frameCount++;
+lastTime = currentTime;
+
+// Если FPS низкий, уменьшаем количество анимаций
+if (fps < 30 && !document.body.classList.contains('reduce-animations')) {
+document.body.classList.add('reduce-animations');
+console.log('Анимации оптимизированы для производительности');
+}
+
+requestAnimationFrame(checkPerformance);
+}
+
+// Запускаем проверку производительности (только на десктопе)
+if (window.innerWidth > 768) {
+requestAnimationFrame(checkPerformance);
+}
+
+// Инициализация элементов с задержкой
+document.addEventListener('DOMContentLoaded', function() {
+// Запускаем проверку скролла после небольшой задержки
+setTimeout(checkScroll, 100);
+  
+// Адаптивная загрузка для мобильных
 if ('ontouchstart' in window) {
 document.querySelectorAll('button, input, select, textarea').forEach(el => {
 el.style.cursor = 'pointer';
+el.style.touchAction = 'manipulation';
 });
+}
+});
+
+// Добавляем поддержку свайпа на мобильных
+let touchStartY = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', e => {
+touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', e => {
+touchEndY = e.changedTouches[0].screenY;
+handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+const swipeLength = touchEndY - touchStartY;
+// Можно добавить логику для свайпа, если нужно
 }
 </script>
 
