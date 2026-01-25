@@ -26,66 +26,95 @@ overflow-x:hidden;
 text-align:center;
 }
 
-/* HERO */
-/* HERO */
+/* HERO - АДАПТИВНЫЙ */
 .hero{
-    height:100vh;
-    background:url('us_chat.jfif') center/cover fixed;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    /* Добавьте эту строку для размытия */
-    backdrop-filter: blur(5px);
-}
-/* Или вместо этого добавьте фильтр к псевдоэлементу */
-.hero::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:rgba(255,255,255,.45);
-    /* Добавьте размытие тут */
-    backdrop-filter: blur(5px);
-}
-.hero-content{position:relative;z-index:2}
-.hero h1{
-font-family:'Great Vibes';
-font-size:5.5rem;
-margin:0;
-color:var(--dark-gold);
-}
-.hero p{
-font-family:'Cinzel';
-letter-spacing:4px;
-margin-top:15px;
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow: hidden;
 }
 
-/* TIMER */
+.hero-bg {
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url('us_chat.jfif') center/cover fixed;
+filter: blur(6px);
+transform: scale(1.05);
+z-index: 1;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background: rgba(255, 255, 255, 0.4);
+z-index: 2;
+}
+
+.hero-content{
+position:relative;
+z-index: 3;
+padding: 0 20px;
+width: 100%;
+max-width: 1200px;
+}
+
+.hero h1{
+font-family:'Great Vibes';
+font-size: clamp(3rem, 10vw, 5.5rem);
+margin:0;
+color:var(--dark-gold);
+line-height: 1.1;
+}
+
+.hero p{
+font-family:'Cinzel';
+letter-spacing: clamp(2px, 1vw, 4px);
+margin-top: 15px;
+font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+}
+
+/* TIMER - АДАПТИВНЫЙ */
 .timer{
 display:flex;
-gap:20px;
+gap: clamp(10px, 3vw, 20px);
 justify-content:center;
-margin-top:40px;
+margin-top: 30px;
+flex-wrap: wrap;
 }
 .timer div{
-background:rgba(255,255,255,.75);
-padding:15px;
+background:rgba(255,255,255,.85);
+padding: clamp(10px, 3vw, 15px);
 border-radius:10px;
-min-width:80px;
+min-width: 70px;
+width: clamp(70px, 20vw, 100px);
+backdrop-filter: blur(5px);
 }
 .timer span:first-child{
-font-size:1.6rem;
+font-size: clamp(1.4rem, 5vw, 1.8rem);
 color:var(--gold);
 font-weight:600;
 display:block;
 }
+.timer span:last-child{
+font-size: clamp(0.75rem, 2vw, 0.9rem);
+display:block;
+margin-top: 5px;
+}
 
 /* SECTIONS */
-section{padding:100px 5%}
+section{
+padding: clamp(60px, 10vw, 100px) 5%;
+}
 .section-title{
 font-family:'Playfair Display';
-font-size:3rem;
-margin-bottom:50px;
+font-size: clamp(2rem, 6vw, 3rem);
+margin-bottom: 40px;
 position:relative;
 }
 .section-title::after{
@@ -97,104 +126,134 @@ display:block;
 margin:15px auto 0;
 }
 
-/* CHILDHOOD */
-.childhood{background:#f9f6f1}
+/* CHILDHOOD - АДАПТИВНЫЙ */
+.childhood{
+background:#f9f6f1;
+}
 .polaroids{
 display:flex;
-gap:40px;
+gap: clamp(20px, 5vw, 40px);
 justify-content:center;
 flex-wrap:wrap;
+padding: 0 10px;
 }
 .polaroid{
 background:white;
-padding:15px 15px 35px;
-max-width:300px;
-box-shadow:0 20px 40px rgba(0,0,0,.08);
+padding: 15px 15px 30px;
+width: 100%;
+max-width: 320px;
+box-shadow:0 15px 30px rgba(0,0,0,.08);
 transform:rotate(-2deg);
 transition:.4s;
 }
 .polaroid:nth-child(even){transform:rotate(3deg)}
 .polaroid:hover{
 transform:rotate(0) translateY(-10px);
-box-shadow:0 30px 60px rgba(197,160,89,.25);
+box-shadow:0 25px 50px rgba(197,160,89,.25);
 }
 .polaroid img{
 width:100%;
-height:300px;
+height: clamp(250px, 70vw, 320px);
 object-fit:cover;
 filter:sepia(.25);
+border-radius: 2px;
 }
 .child-name{
 font-family:'Great Vibes';
-font-size:2rem;
+font-size: clamp(1.8rem, 6vw, 2.2rem);
 color:var(--dark-gold);
-margin-top:15px;
+margin-top: 15px;
+line-height: 1.2;
 }
 .child-text{
 display:block;
-margin-top:10px;
-font-size:.95rem;
+margin-top: 10px;
+font-size: clamp(0.85rem, 3vw, 1rem);
 line-height:1.6;
 color:#666;
 font-weight:300;
+padding: 0 5px;
 }
 
-/* DESTINY */
+/* DESTINY - АДАПТИВНЫЙ */
 .destiny{
 background:linear-gradient(to bottom,#f9f6f1,#fff);
-padding:120px 20px;
+padding: clamp(60px, 10vw, 120px) 20px;
 }
 .destiny-line{
 width:2px;
-height:120px;
+height: clamp(80px, 15vw, 120px);
 background:linear-gradient(to bottom,transparent,var(--gold),transparent);
-margin:0 auto 40px;
+margin:0 auto 30px;
 }
 .destiny p{
-font-size:1.4rem;
-margin:10px 0;
+font-size: clamp(1.1rem, 4vw, 1.4rem);
+margin: 8px 0;
 font-weight:300;
 }
 .destiny .accent{
 font-family:'Great Vibes';
-font-size:3rem;
+font-size: clamp(2.2rem, 8vw, 3rem);
 color:var(--gold);
-margin-top:20px;
+margin-top: 20px;
+line-height: 1.1;
 }
 .destiny-years{
-margin-top:40px;
+margin-top: 30px;
 font-family:'Cinzel';
-letter-spacing:4px;
+letter-spacing: clamp(2px, 2vw, 4px);
 color:#777;
 display:flex;
-gap:30px;
+gap: clamp(15px, 4vw, 30px);
 justify-content:center;
+flex-wrap: wrap;
+}
+.destiny-years span{
+font-size: clamp(1.2rem, 4vw, 1.5rem);
 }
 
-/* STORY — ДВЕ ФОТО */
+/* STORY - АДАПТИВНЫЙ */
 .story{
 display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-align-items:right;
+grid-template-columns: 1fr;
+gap: 40px;
+align-items: center;
+}
+@media(min-width: 992px){
+.story{
+grid-template-columns: 1fr 1fr;
+}
 }
 .story-photos{
 position:relative;
+width: 100%;
 }
 .story-photos img{
-margin-left:20% ;
-width:60%;
+width: 100%;
+max-width: 500px;
+margin: 0 auto;
 display:block;
-box-shadow:0 20px 40px rgba(0,0,0,.15);
+box-shadow:0 15px 40px rgba(0,0,0,.12);
+border-radius: 4px;
 }
 
 .story-text{
+text-align:center;
+font-size: clamp(1rem, 3vw, 1.1rem);
+line-height:1.7;
+padding: 0 10px;
+}
+@media(min-width: 992px){
+.story-text{
 text-align:left;
-font-size:1.1rem;
-line-height:1.8;
+padding: 0 0 0 40px;
+}
+}
+.story-text p{
+margin-bottom: 20px;
 }
 
-/* RSVP */
+/* RSVP - АДАПТИВНЫЙ */
 .rsvp{
 background:linear-gradient(135deg,#fdfcf9,#f3ede4);
 }
@@ -202,48 +261,97 @@ background:linear-gradient(135deg,#fdfcf9,#f3ede4);
 max-width:650px;
 margin:auto;
 background:white;
-padding:60px;
-box-shadow:0 40px 100px rgba(0,0,0,.08);
+padding: clamp(30px, 6vw, 60px) clamp(20px, 5vw, 60px);
+box-shadow:0 20px 60px rgba(0,0,0,.06);
+border-radius: 8px;
 }
 input,select,textarea{
 width:100%;
-padding:15px;
-margin-bottom:20px;
+padding: 15px 0;
+margin-bottom: 20px;
 border:none;
-border-bottom:1px solid #ccc;
+border-bottom:1px solid #ddd;
 font-family:inherit;
+font-size: 16px; /* Предотвращает масштабирование на iOS */
+background: transparent;
+}
+input:focus, select:focus, textarea:focus{
+outline:none;
+border-bottom-color: var(--gold);
 }
 button{
 background:var(--gold);
 color:white;
 border:none;
-padding:18px 50px;
+padding: clamp(15px, 4vw, 18px) clamp(40px, 8vw, 50px);
 font-family:'Cinzel';
 letter-spacing:2px;
 cursor:pointer;
 transition:.3s;
+font-size: clamp(0.9rem, 3vw, 1rem);
+border-radius: 4px;
+width: 100%;
+max-width: 300px;
+margin-top: 10px;
 }
 button:hover{background:var(--dark-gold)}
+@media(min-width: 480px){
+button{
+width: auto;
+}
+}
 
 /* FOOTER */
 footer{
 background:#2c2c2c;
 color:#aaa;
-padding:40px;
-font-size:.8rem;
+padding: 30px 20px;
+font-size: clamp(0.7rem, 2vw, 0.85rem);
 letter-spacing:2px;
+line-height: 1.5;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-.hero h1{font-size:3.2rem}
-.story{grid-template-columns:1fr}
-.story-photos .photo-second{
-position:relative;
-top:0;
-left:0;
-width:100%;
-margin-top:20px;
+/* MOBILE ОПТИМИЗАЦИЯ */
+@media(max-width: 768px){
+.hero h1{
+font-size: 3.5rem;
+margin-top: -20px;
+}
+.hero p{
+letter-spacing: 2px;
+}
+
+.polaroid{
+transform: none !important;
+margin-bottom: 30px;
+}
+.polaroid:hover{
+transform: translateY(-5px) !important;
+}
+
+.destiny p{
+margin: 5px 0;
+}
+
+.form{
+padding: 30px 25px;
+}
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ */
+@media(max-width: 480px){
+.hero h1{
+font-size: 2.8rem;
+}
+.section-title{
+margin-bottom: 30px;
+}
+.timer{
+gap: 8px;
+}
+.timer div{
+min-width: 65px;
+padding: 12px 8px;
 }
 }
 </style>
@@ -253,15 +361,16 @@ margin-top:20px;
 
 <!-- HERO -->
 <section class="hero">
+<div class="hero-bg"></div>
 <div class="hero-content" data-aos="fade-up">
 <p>Приглашение на свадьбу</p>
 <h1>Артур & Лилия</h1>
 <div class="timer">
-<div><span id="days">00</span>Дней</div>
-<div><span id="hours">00</span>Часов</div>
-<div><span id="minutes">00</span>Минут</div>
+<div><span id="days">00</span><span>Дней</span></div>
+<div><span id="hours">00</span><span>Часов</span></div>
+<div><span id="minutes">00</span><span>Минут</span></div>
 </div>
-<p style="margin-top:25px">9 мая 2026 · Самара</p>
+<p style="margin-top:25px; font-size: clamp(1rem, 3vw, 1.2rem)">9 мая 2026 · Самара</p>
 </div>
 </section>
 
@@ -270,20 +379,20 @@ margin-top:20px;
 <h2 class="section-title" data-aos="fade-up">С чего всё начиналось</h2>
 <div class="polaroids">
 <div class="polaroid" data-aos="zoom-in">
-<img src="Artur.jpg">
+<img src="Artur.jpg" alt="Артур в детстве">
 <p class="child-name">Артур</p>
 <span class="child-text">
-Он рос, даже не подозревая,<br>
-что однажды станет чьей-то опорой,<br>
+Он рос, даже не подозревая,
+что однажды станет чьей-то опорой,
 чьим-то «навсегда».
 </span>
 </div>
 <div class="polaroid" data-aos="zoom-in" data-aos-delay="200">
-<img src="liblu.jpg">
+<img src="liblu.jpg" alt="Лилия в детстве">
 <p class="child-name">Лилия</p>
 <span class="child-text">
-Она улыбалась миру,<br>
-не зная, что где-то рядом<br>
+Она улыбалась миру,
+не зная, что где-то рядом
 растёт её судьба.
 </span>
 </div>
@@ -306,15 +415,15 @@ margin-top:20px;
 <!-- STORY -->
 <section>
 <div class="story">
-<div class="story-photos" data-aos="fade-right">
-<img src="us.jpg" class="photo-main" alt="Мы">
+<div class="story-photos" data-aos="fade-up">
+<img src="us.jpg" class="photo-main" alt="Артур и Лилия">
 </div>
 
-<div class="story-text" data-aos="fade-left">
+<div class="story-text" data-aos="fade-up" data-aos-delay="200">
 <h2 class="section-title">Наша история</h2>
 <p>Мы начинали этот путь как два разных мира. Со временем стало ясно — это навсегда.</p>
 <p>И теперь мы приглашаем вас стать частью дня, когда два пути стали одним.</p>
-<p style="font-family:'Great Vibes';font-size:2rem;color:var(--gold)">
+<p style="font-family:'Great Vibes';font-size: clamp(1.8rem, 6vw, 2.2rem);color:var(--gold); margin-top: 30px;">
 С любовью, Артур и Лилия
 </p>
 </div>
@@ -344,15 +453,37 @@ ARTUR & LILIYA · 2026 · FOREVER
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-AOS.init({once:true});
-const date=new Date("May 9, 2026 16:00").getTime();
-setInterval(()=>{
-const now=new Date().getTime();
-const d=date-now;
-days.innerText=Math.floor(d/(1000*60*60*24));
-hours.innerText=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-minutes.innerText=Math.floor((d%(1000*60*60))/(1000*60));
-},1000);
+AOS.init({
+once:true,
+duration: 800,
+offset: 100,
+delay: 50,
+disable: function() {
+return window.innerWidth < 768;
+}
+});
+
+const date = new Date("May 9, 2026 16:00").getTime();
+
+function updateTimer() {
+const now = new Date().getTime();
+const d = date - now;
+if (d > 0) {
+document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24));
+document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60));
+}
+}
+
+updateTimer();
+setInterval(updateTimer, 1000);
+
+// Оптимизация для мобильных устройств
+if ('ontouchstart' in window) {
+document.querySelectorAll('button, input, select, textarea').forEach(el => {
+el.style.cursor = 'pointer';
+});
+}
 </script>
 
 </body>
