@@ -69,6 +69,53 @@ z-index: 3;
 padding: 0 20px;
 width: 100%;
 max-width: 1200px;
+/* Добавляем верхний отступ для всего контента на мобильных */
+padding-top: 10vh;
+}
+
+@media (min-width: 769px) {
+.hero-content {
+padding-top: 0; /* На десктопе убираем верхний отступ */
+}
+}
+
+.hero .invitation-text {
+font-family:'Cinzel';
+letter-spacing: clamp(2px, 1vw, 4px);
+margin-top: 15px;
+font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+animation: fadeInUp 1s ease-out 0.5s both;
+/* Увеличиваем отступ сверху для мобильных */
+margin-top: 0;
+margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+.hero .invitation-text {
+margin-top: -20px; /* Поднимаем выше на мобильных */
+margin-bottom: 30px;
+font-size: 1rem;
+}
+}
+
+@media (max-width: 480px) {
+.hero .invitation-text {
+margin-top: -30px; /* Еще выше на очень маленьких экранах */
+margin-bottom: 25px;
+font-size: 0.95rem;
+letter-spacing: 2px;
+}
+}
+
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(20px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 .hero h1{
@@ -85,23 +132,9 @@ animation: titleGlow 3s ease-in-out infinite alternate;
 100% { text-shadow: 0 0 25px rgba(197, 160, 89, 0.4); }
 }
 
-.hero p{
-font-family:'Cinzel';
-letter-spacing: clamp(2px, 1vw, 4px);
-margin-top: 15px;
-font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-animation: fadeInUp 1s ease-out 0.5s both;
-}
-
-@keyframes fadeInUp {
-from {
-opacity: 0;
-transform: translateY(20px);
-}
-to {
-opacity: 1;
-transform: translateY(0);
-}
+.hero .date-text {
+font-size: clamp(1rem, 3vw, 1.2rem);
+margin-top: 25px;
 }
 
 /* TIMER - АДАПТИВНЫЙ */
@@ -112,6 +145,13 @@ justify-content:center;
 margin-top: 30px;
 flex-wrap: wrap;
 }
+
+@media (max-width: 768px) {
+.timer {
+margin-top: 20px; /* Уменьшаем отступ на мобильных */
+}
+}
+
 .timer div{
 background:rgba(255,255,255,.85);
 padding: clamp(10px, 3vw, 15px);
@@ -774,10 +814,12 @@ transition-duration: 0.01ms !important;
 @media(max-width: 768px){
 .hero h1{
 font-size: 3.5rem;
-margin-top: -20px;
+margin-top: -10px; /* Уменьшаем отступ сверху у заголовка */
 }
-.hero p{
-letter-spacing: 2px;
+
+.hero .date-text {
+margin-top: 20px;
+font-size: 1rem;
 }
 
 .polaroid{
@@ -839,12 +881,27 @@ to { transform: rotate(360deg); }
 @media(max-width: 480px){
 .hero h1{
 font-size: 2.8rem;
+margin-top: -15px; /* Еще меньше отступ на маленьких экранах */
 }
+
+.hero .invitation-text {
+margin-top: -35px; /* Максимально поднимаем текст */
+margin-bottom: 20px;
+font-size: 0.9rem;
+letter-spacing: 1.5px;
+}
+
+.hero .date-text {
+margin-top: 15px;
+font-size: 0.9rem;
+}
+
 .section-title{
 margin-bottom: 30px;
 }
 .timer{
 gap: 8px;
+margin-top: 15px;
 }
 .timer div{
 min-width: 65px;
@@ -908,14 +965,15 @@ transform: translateY(0);
 <section class="hero">
 <div class="hero-bg"></div>
 <div class="hero-content" data-aos="fade-up">
-<p>Приглашение на свадьбу</p>
+<!-- Добавляем отдельный класс для текста приглашения -->
+<p class="invitation-text">Приглашение на свадьбу</p>
 <h1>Артур & Лилия</h1>
 <div class="timer">
 <div style="--i: 0"><span id="days">00</span><span>Дней</span></div>
 <div style="--i: 1"><span id="hours">00</span><span>Часов</span></div>
 <div style="--i: 2"><span id="minutes">00</span><span>Минут</span></div>
 </div>
-<p style="margin-top:25px; font-size: clamp(1rem, 3vw, 1.2rem)">9 мая 2026 · Самара</p>
+<p class="date-text">9 мая 2026 · Самара</p>
 </div>
 </section>
 
@@ -1107,6 +1165,22 @@ el.style.cursor = 'pointer';
 el.style.touchAction = 'manipulation';
 });
 }
+
+// Плавный скролл для якорей
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+}
+});
+});
 });
 
 // Добавляем поддержку свайпа на мобильных
