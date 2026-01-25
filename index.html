@@ -27,19 +27,25 @@ text-align:center;
 }
 
 /* HERO */
+/* HERO */
 .hero{
-height:100vh;
-background:url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80') center/cover fixed;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
+    height:100vh;
+    background:url('us_chat.jfif') center/cover fixed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    /* Добавьте эту строку для размытия */
+    backdrop-filter: blur(5px);
 }
+/* Или вместо этого добавьте фильтр к псевдоэлементу */
 .hero::before{
-content:'';
-position:absolute;
-inset:0;
-background:rgba(255,255,255,.45);
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,.45);
+    /* Добавьте размытие тут */
+    backdrop-filter: blur(5px);
 }
 .hero-content{position:relative;z-index:2}
 .hero h1{
