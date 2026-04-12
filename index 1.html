@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>Artur & Liliya — Приглашение на свадьбу</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&family=Montserrat:wght@200;300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+:root{
+--gold:#c5a059;
+--dark-gold:#947434;
+--light-gold:#e8d9b8;
+--bg:#fdfcf9;
+--text:#2c2c2c;
+--brown:#8B5A2B;
+--light-brown:#D2B48C;
+}
+
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{
+margin:0;
+font-family:'Montserrat',sans-serif;
+background:var(--bg);
+color:var(--text);
+overflow-x:hidden;
+text-align:center;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow: hidden;
+}
+
+.hero-bg {
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url('promo.jpg') center/cover;
+filter: blur(6px);
+transform: scale(1.05);
+z-index: 1;
+animation: bgFloat 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgFloat {
+0% { transform: scale(1.05) translateY(0); }
+100% { transform: scale(1.08) translateY(-10px); }
+}
+
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background: rgba(255, 255, 255, 0.4);
+z-index: 2;
+}
+
+.hero-content{
+position:relative;
+z-index: 3;
+padding: 0 20px;
+width: 100%;
+max-width: 1200px;
+padding-top: 10vh;
+}
+
+@media (min-width: 769px) {
+.hero-content {
+padding-top: 0;
+}
+}
+
+.hero .invitation-text {
+font-family:'Cinzel';
+letter-spacing: clamp(2px, 1vw, 4px);
+margin-top: 15px;
+font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+animation: fadeInUp 1s ease-out 0.5s both;
+margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+.hero .invitation-text {
+margin-top: -20px;
+margin-bottom: 30px;
+font-size: 1rem;
+}
+}
+
+@media (max-width: 480px) {
+.hero .invitation-text {
+margin-top: -30px;
+margin-bottom: 25px;
+font-size: 0.95rem;
+letter-spacing: 2px;
+}
+}
+
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1{
+font-family:'Great Vibes';
+font-size: clamp(3rem, 10vw, 5.5rem);
+margin:0;
+color:var(--dark-gold);
+line-height: 1.1;
+animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+0% { text-shadow: 0 0 10px rgba(197, 160, 89, 0.2); }
+100% { text-shadow: 0 0 25px rgba(197, 160, 89, 0.4); }
+}
+
+.hero .date-text {
+font-size: clamp(1rem, 3vw, 1.2rem);
+margin-top: 25px;
+}
+
+/* TIMER */
+.timer{
+display:flex;
+gap: clamp(10px, 3vw, 20px);
+justify-content:center;
+margin-top: 30px;
+flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+.timer {
+margin-top: 20px;
+}
+}
+
+.timer div{
+background:rgba(255,255,255,.85);
+padding: clamp(10px, 3vw, 15px);
+border-radius:10px;
+min-width: 70px;
+width: clamp(70px, 20vw, 100px);
+backdrop-filter: blur(5px);
+animation: pulse 2s infinite;
+animation-delay: calc(var(--i) * 0.2s);
+}
+
+@keyframes pulse {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.05); }
+}
+
+.timer span:first-child{
+font-size: clamp(1.4rem, 5vw, 1.8rem);
+color:var(--gold);
+font-weight:600;
+display:block;
+}
+.timer span:last-child{
+font-size: clamp(0.75rem, 2vw, 0.9rem);
+display:block;
+margin-top: 5px;
+}
+
+/* WELCOME TEXT BLOCK */
+.welcome-block{
+padding: clamp(50px, 8vw, 80px) 5%;
+background: linear-gradient(135deg, #fdfcf9 0%, #f8f4eb 100%);
+opacity: 0;
+animation: sectionAppear 0.8s ease-out forwards;
+}
+
+@keyframes sectionAppear {
+to { opacity: 1; }
+}
+
+.welcome-card{
+max-width: 800px;
+margin: 0 auto;
+background: white;
+padding: clamp(30px, 5vw, 50px) clamp(25px, 6vw, 60px);
+border-radius: 16px;
+box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+position: relative;
+border: 1px solid rgba(197,160,89,0.2);
+}
+
+.welcome-card::before{
+content: '✦';
+position: absolute;
+top: -15px;
+left: 50%;
+transform: translateX(-50%);
+background: white;
+padding: 0 20px;
+color: var(--gold);
+font-size: 1.5rem;
+font-family: serif;
+}
+
+.welcome-text{
+font-family: 'Playfair Display', serif;
+font-size: clamp(1rem, 3.5vw, 1.2rem);
+line-height: 1.7;
+color: #3a3a3a;
+margin-bottom: 20px;
+font-weight: 400;
+}
+
+.welcome-text p{
+margin: 0 0 15px 0;
+}
+
+.welcome-text p:first-child{
+font-weight: 600;
+color: var(--dark-gold);
+}
+
+/* PROGRAM BLOCK */
+.program-block{
+margin-top: 20px;
+padding-top: 20px;
+border-top: 1px solid rgba(197,160,89,0.3);
+}
+
+.program-title{
+font-family: 'Cinzel';
+font-size: clamp(1.3rem, 4vw, 1.8rem);
+letter-spacing: 4px;
+color: var(--dark-gold);
+margin-bottom: 25px;
+}
+
+.program-grid{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: clamp(15px, 4vw, 35px);
+margin: 20px 0;
+}
+
+.program-item{
+text-align: center;
+min-width: 100px;
+padding: 12px 8px;
+background: rgba(197,160,89,0.08);
+border-radius: 12px;
+transition: all 0.3s ease;
+}
+
+.program-item:hover{
+background: rgba(197,160,89,0.15);
+transform: translateY(-3px);
+}
+
+.program-time{
+font-family: 'Cinzel';
+font-size: clamp(1.1rem, 3vw, 1.3rem);
+font-weight: 700;
+color: var(--gold);
+display: block;
+}
+
+.program-event{
+font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+color: #555;
+margin-top: 6px;
+display: block;
+}
+
+/* DRESS CODE BLOCK */
+.dress-code-block{
+margin-top: 30px;
+padding-top: 25px;
+border-top: 1px solid rgba(197,160,89,0.3);
+}
+
+.dress-code-title{
+font-family: 'Cinzel';
+font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+letter-spacing: 3px;
+color: var(--brown);
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
+}
+
+.dress-code-sub{
+font-size: 0.9rem;
+color: #666;
+margin-bottom: 20px;
+font-style: italic;
+}
+
+.dress-code-colors{
+display: flex;
+justify-content: center;
+gap: clamp(12px, 3vw, 25px);
+flex-wrap: wrap;
+margin: 15px 0;
+}
+
+.color-swatch{
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 6px;
+}
+
+.color-circle{
+width: 45px;
+height: 45px;
+border-radius: 50%;
+box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+transition: transform 0.3s ease;
+}
+
+.color-circle:hover{
+transform: scale(1.1);
+}
+
+.color-circle.beige{ background: #D2B48C; border: 1px solid #c5a059; }
+.color-circle.coffee{ background: #6F4E37; }
+.color-circle.terracotta{ background: #C87A5A; }
+.color-circle.cognac{ background: #9A4D2C; }
+.color-circle.chocolate{ background: #7B3F00; }
+.color-circle.taupe{ background: #8B8378; }
+
+.color-name{
+font-size: 0.7rem;
+color: #666;
+font-weight: 400;
+}
+
+.dress-code-note{
+margin-top: 15px;
+font-size: 0.85rem;
+color: #888;
+font-style: italic;
+}
+
+.dress-code-gender{
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-top: 15px;
+flex-wrap: wrap;
+}
+
+.gender-item{
+font-size: 0.85rem;
+color: #555;
+background: rgba(197,160,89,0.1);
+padding: 5px 12px;
+border-radius: 20px;
+}
+
+/* VENUE & MAP BLOCK - НОВЫЙ БЛОК */
+.venue-block{
+padding: clamp(50px, 8vw, 80px) 5%;
+background: #f9f6f1;
+}
+
+.venue-container{
+max-width: 1000px;
+margin: 0 auto;
+}
+
+.venue-title{
+font-family: 'Cinzel';
+font-size: clamp(1.5rem, 5vw, 2rem);
+letter-spacing: 4px;
+color: var(--dark-gold);
+margin-bottom: 40px;
+}
+
+.venue-grid{
+display: flex;
+flex-wrap: wrap;
+gap: 30px;
+justify-content: center;
+}
+
+.venue-card{
+flex: 1;
+min-width: 280px;
+background: white;
+border-radius: 16px;
+overflow: hidden;
+box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.venue-card:hover{
+transform: translateY(-8px);
+box-shadow: 0 25px 45px rgba(197,160,89,0.15);
+}
+
+.venue-img{
+width: 100%;
+height: 250px;
+object-fit: cover;
+display: block;
+transition: transform 0.5s ease;
+}
+
+.venue-card:hover .venue-img{
+transform: scale(1.03);
+}
+
+.venue-card-content{
+padding: 20px;
+}
+
+.venue-card-title{
+font-family: 'Cinzel';
+font-size: 1.2rem;
+color: var(--gold);
+margin-bottom: 8px;
+}
+
+.venue-card-address{
+font-size: 0.85rem;
+color: #777;
+margin-bottom: 12px;
+}
+
+.venue-card-desc{
+font-size: 0.9rem;
+color: #555;
+line-height: 1.5;
+}
+
+/* GOOGLE FORMS SECTION */
+.google-form-section{
+padding: clamp(60px, 10vw, 100px) 5%;
+background: linear-gradient(135deg, #fdfcf9, #f3ede4);
+}
+
+.section-title{
+font-family:'Playfair Display';
+font-size: clamp(2rem, 6vw, 3rem);
+margin-bottom: 40px;
+position:relative;
+}
+.section-title::after{
+content:'';
+width:60px;
+height:2px;
+background:var(--gold);
+display:block;
+margin:15px auto 0;
+animation: lineExpand 1s ease-out 0.5s both;
+}
+
+@keyframes lineExpand {
+from { width: 0; opacity: 0; }
+to { width: 60px; opacity: 1; }
+}
+
+.google-form-container {
+max-width: 650px;
+margin: auto;
+background: white;
+padding: clamp(30px, 6vw, 60px) clamp(20px, 5vw, 60px);
+box-shadow: 0 20px 60px rgba(0,0,0,.06);
+border-radius: 8px;
+position: relative;
+overflow: hidden;
+}
+
+.google-form-container::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 3px;
+background: linear-gradient(90deg, var(--gold), var(--dark-gold), var(--gold));
+}
+
+.form-header {
+margin-bottom: 30px;
+}
+
+.form-description {
+color: #666;
+font-size: 1.1rem;
+margin-bottom: 30px;
+line-height: 1.6;
+}
+
+.form-iframe-wrapper {
+position: relative;
+width: 100%;
+height: 0;
+padding-bottom: 500px;
+overflow: hidden;
+border-radius: 8px;
+}
+
+.google-form-iframe {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border: none;
+}
+
+@media (max-width: 768px) {
+.form-iframe-wrapper {
+padding-bottom: 650px;
+}
+}
+
+@media (max-width: 480px) {
+.form-iframe-wrapper {
+padding-bottom: 750px;
+}
+}
+
+.form-instructions {
+margin-top: 30px;
+padding: 20px;
+background: #f9f6f1;
+border-radius: 8px;
+text-align: left;
+}
+
+.form-instructions h3 {
+color: var(--dark-gold);
+margin-bottom: 10px;
+font-family: 'Cinzel';
+}
+
+.form-instructions ol {
+padding-left: 20px;
+margin: 10px 0;
+}
+
+.form-instructions li {
+margin-bottom: 8px;
+color: #555;
+}
+
+.form-instructions p {
+color: #777;
+font-size: 0.9rem;
+margin-top: 15px;
+font-style: italic;
+}
+
+/* FOOTER */
+footer{
+background:#2c2c2c;
+color:#aaa;
+padding: 30px 20px;
+font-size: clamp(0.7rem, 2vw, 0.85rem);
+letter-spacing:2px;
+line-height: 1.5;
+position: relative;
+animation: footerAppear 1s ease-out 0.5s both;
+opacity: 0;
+}
+
+@keyframes footerAppear {
+to { opacity: 1; }
+}
+
+/* АДАПТИВ */
+@media (prefers-reduced-motion: reduce) {
+*, ::before, ::after {
+animation-duration: 0.01ms !important;
+animation-iteration-count: 1 !important;
+transition-duration: 0.01ms !important;
+}
+}
+
+@media(max-width: 768px){
+.hero h1{
+font-size: 3.5rem;
+margin-top: -10px;
+}
+.hero .date-text {
+margin-top: 20px;
+font-size: 1rem;
+}
+.hero-bg {
+animation: bgFloatMobile 30s ease-in-out infinite alternate;
+}
+@keyframes bgFloatMobile {
+0% { transform: scale(1.05) translateY(0); }
+100% { transform: scale(1.06) translateY(-5px); }
+}
+.timer div {
+animation: pulseMobile 3s infinite;
+}
+@keyframes pulseMobile {
+0%, 100% { transform: scale(1); }
+50% { transform: scale(1.03); }
+}
+.color-circle{
+width: 38px;
+height: 38px;
+}
+.program-item{
+min-width: 80px;
+padding: 8px 6px;
+}
+.venue-img{
+height: 200px;
+}
+}
+
+@media(max-width: 480px){
+.hero h1{
+font-size: 2.8rem;
+margin-top: -15px;
+}
+.hero .invitation-text {
+margin-top: -35px;
+margin-bottom: 20px;
+font-size: 0.9rem;
+letter-spacing: 1.5px;
+}
+.hero .date-text {
+margin-top: 15px;
+font-size: 0.9rem;
+}
+.timer{
+gap: 8px;
+margin-top: 15px;
+}
+.timer div{
+min-width: 65px;
+padding: 12px 8px;
+animation: none;
+}
+.google-form-container{
+padding: 30px 25px;
+}
+.color-circle{
+width: 32px;
+height: 32px;
+}
+.dress-code-colors{
+gap: 10px;
+}
+.program-grid{
+gap: 10px;
+}
+.program-item{
+min-width: 70px;
+}
+.program-time{
+font-size: 1rem;
+}
+.program-event{
+font-size: 0.7rem;
+}
+.venue-img{
+height: 180px;
+}
+}
+
+@supports (backdrop-filter: blur(10px)) {
+.timer div {
+backdrop-filter: blur(10px);
+}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-content" data-aos="fade-up">
+<p class="invitation-text">Приглашение на свадьбу</p>
+<h1>Артур & Лилия</h1>
+<div class="timer">
+<div style="--i: 0"><span id="days">00</span><span>Дней</span></div>
+<div style="--i: 1"><span id="hours">00</span><span>Часов</span></div>
+<div style="--i: 2"><span id="minutes">00</span><span>Минут</span></div>
+</div>
+<p class="date-text">9 мая 2026 · Самара · Сбор гостей в 16:30</p>
+<p class="date-text">Николаевский проспект, 2. Банкетный холл "Фьюжн"</p>
+</div>
+</section>
+
+<!-- WELCOME TEXT + PROGRAM + DRESS CODE -->
+<section class="welcome-block">
+<div class="welcome-card" data-aos="fade-up">
+<div class="welcome-text">
+<p>ДОРОГИЕ РОДНЫЕ И БЛИЗКИЕ!</p>
+<p>Мы рады сообщить вам, что скоро состоится самое главное торжество в нашей жизни — день нашей свадьбы!</p>
+<p>Приглашаем вас разделить с нами радость этого незабываемого дня.</p>
+</div>
+
+<!-- ПРОГРАММА ТОРЖЕСТВА -->
+<div class="program-block">
+<div class="program-title">ПРОГРАММА ТОРЖЕСТВА</div>
+<div class="program-grid">
+<div class="program-item">
+<span class="program-time">14:30</span>
+<span class="program-event">СБОР ГОСТЕЙ</span>
+</div>
+<div class="program-item">
+<span class="program-time">15:00</span>
+<span class="program-event">ВЕНЧАНИЕ</span>
+</div>
+<div class="program-item">
+<span class="program-time">17:00</span>
+<span class="program-event">БАНКЕТ</span>
+</div>
+<div class="program-item">
+<span class="program-time">21:00</span>
+<span class="program-event">ТОРТ</span>
+</div>
+</div>
+</div>
+
+<!-- ДРЕСС-КОД -->
+<div class="dress-code-block">
+<div class="dress-code-title">
+<span>👔</span> DRESS CODE <span>👗</span>
+</div>
+<p class="dress-code-sub">Мы хотим создать особенную атмосферу и эстетику в этот прекрасный день, поэтому просим вас учесть данную цветовую гамму при выборе наряда.</p>
+
+<div class="dress-code-colors">
+<div class="color-swatch">
+<div class="color-circle beige"></div>
+<span class="color-name">Бежевый</span>
+</div>
+<div class="color-swatch">
+<div class="color-circle coffee"></div>
+<span class="color-name">Кофейный</span>
+</div>
+<div class="color-swatch">
+<div class="color-circle terracotta"></div>
+<span class="color-name">Терракота</span>
+</div>
+<div class="color-swatch">
+<div class="color-circle cognac"></div>
+<span class="color-name">Коньячный</span>
+</div>
+<div class="color-swatch">
+<div class="color-circle chocolate"></div>
+<span class="color-name">Шоколадный</span>
+</div>
+<div class="color-swatch">
+<div class="color-circle taupe"></div>
+<span class="color-name">Тауп</span>
+</div>
+</div>
+
+<div class="dress-code-gender">
+<span class="gender-item">👗 ДАМЫ: элегантные платья, костюмы</span>
+<span class="gender-item">👔 МУЖЧИНЫ: костюмы, рубашки</span>
+</div>
+
+<p class="dress-code-note">✨ Будем рады видеть вас в элегантных образах в этих тёплых оттенках ✨</p>
+</div>
+</div>
+</section>
+
+<!-- БАНКЕТНЫЙ ЗАЛ И КАРТА ПРОЕЗДА -->
+<section class="venue-block">
+<div class="venue-container" data-aos="fade-up">
+<h2 class="venue-title">МЕСТО ПРОВЕДЕНИЯ</h2>
+<div class="venue-grid">
+<!-- Фото зала -->
+<div class="venue-card">
+<img src="enter.jpg" alt="Банкетный холл Фьюжн" class="venue-img">
+<div class="venue-card-content">
+<div class="venue-card-title">Банкетный холл "Фьюжн"</div>
+<div class="venue-card-address">Николаевский проспект, 2, Самара</div>
+<div class="venue-card-desc">Просторный светлый зал с панорамными окнами, идеально подходящий для торжественных событий.</div>
+</div>
+</div>
+<!-- Карта проезда -->
+<div class="venue-card">
+<img src="map.jpg" alt="Карта проезда" class="venue-img">
+<div class="venue-card-content">
+<div class="venue-card-title">Как добраться</div>
+<div class="venue-card-address">Николаевский проспект, 2</div>
+<div class="venue-card-desc">Удобная парковка, рядом остановки общественного транспорта. Схема проезда на карте.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- GOOGLE FORM SECTION -->
+<section class="google-form-section">
+<div class="google-form-container" data-aos="flip-up">
+<div class="form-header">
+<h2 class="section-title">Подтвердите присутствие</h2>
+<p class="form-description">
+Пожалуйста, заполните форму Google Forms, чтобы мы могли лучше подготовиться к нашему особому дню
+</p>
+</div>
+
+<div class="form-iframe-wrapper">
+<iframe 
+src="https://forms.gle/qcAX2PcG2Lucd79MA" 
+class="google-form-iframe"
+title="Форма подтверждения присутствия">
+Загрузка формы...
+</iframe>
+</div>
+
+<div class="form-instructions">
+<h3>Как заполнить форму:</h3>
+<ol>
+<li>Заполните все обязательные поля (отмечены *)</li>
+<li>В разделе "Пожелания" можете написать всё, что пожелаете (если придете семьей, укажите количество человек)</li>
+<li>Нажмите "Отправить" в конце формы</li>
+<li>Вы получите подтверждение об успешной отправке</li>
+</ol>
+<p>Если у вас возникли проблемы с формой, свяжитесь с нами напрямую</p>
+</div>
+</div>
+</section>
+
+<footer>
+ARTUR & LILIYA · 2026 · FOREVER
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+once: true,
+duration: 800,
+offset: 100,
+delay: 50,
+disable: window.innerWidth < 320
+});
+
+// Таймер
+const date = new Date("May 9, 2026 16:00").getTime();
+
+function updateTimer() {
+const now = new Date().getTime();
+const d = date - now;
+if (d > 0) {
+document.getElementById('days').innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+document.getElementById('hours').innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+document.getElementById('minutes').innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+}
+}
+
+updateTimer();
+setInterval(updateTimer, 1000);
+
+function adjustIframeHeight() {
+const iframes = document.querySelectorAll('.google-form-iframe');
+iframes.forEach(iframe => {
+const wrapper = iframe.closest('.form-iframe-wrapper');
+if (wrapper && window.innerWidth <= 768) {
+// handled by CSS
+}
+});
+}
+
+window.addEventListener('load', adjustIframeHeight);
+window.addEventListener('resize', adjustIframeHeight);
+
+function supportsAnimations() {
+return 'animation' in document.documentElement.style || 
+'WebkitAnimation' in document.documentElement.style;
+}
+
+if (!supportsAnimations()) {
+document.documentElement.classList.add('no-animations');
+}
+</script>
+
+</body>
+</html>
